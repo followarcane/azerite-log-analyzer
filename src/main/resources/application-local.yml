@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/log_analyzer
+    username: postgres
+    password: pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  server:
+    port: 2593
+
+warcraftlogs:
+  client-id: "9dc52747-5c43-4ff7-9b92-90ab203553cc"
+  client-secret: "AlFUDWhkt8OyOPDM3rN0rXNiPotuX8mmQV2kxmgn"
+  redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+provider:
+  warcraftlogs:
+    token-uri: https://www.warcraftlogs.com/oauth/token
+    client-uri: https://www.warcraftlogs.com/api/v2/client
+    user-uri: https://www.warcraftlogs.com/api/v2/user
