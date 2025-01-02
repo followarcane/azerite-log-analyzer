@@ -1,0 +1,7 @@
+# application.yml (Common Settings)
+
+spring:
+  application:
+    name: log-analyzer
+  profiles:
+    active: local
