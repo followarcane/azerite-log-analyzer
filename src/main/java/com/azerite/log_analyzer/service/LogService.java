@@ -1,9 +1,7 @@
 package com.azerite.log_analyzer.service;
 
-import com.azerite.log_analyzer.service.converter.ReportActorConverter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
