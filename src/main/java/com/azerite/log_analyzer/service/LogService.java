@@ -1,5 +1,6 @@
 package com.azerite.log_analyzer.service;
 
+import com.azerite.log_analyzer.exception.ApiException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,7 +53,7 @@ public class LogService {
             JsonNode jsonNode = objectMapper.readTree(responseBody);
             return jsonNode.get("access_token").asText();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse access token from response: " + responseBody, e);
+            throw new ApiException("Failed to parse access token from response: " + responseBody);
         }
     }
 
