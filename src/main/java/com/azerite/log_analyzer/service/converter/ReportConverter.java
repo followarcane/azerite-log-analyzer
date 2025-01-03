@@ -1,6 +1,6 @@
 package com.azerite.log_analyzer.service.converter;
 
-import com.azerite.log_analyzer.dto.ReportActorDTO;
+import com.azerite.log_analyzer.exception.ApiException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -8,22 +8,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReportActorConverter {
+public class ReportConverter {
 
     private final ObjectMapper objectMapper;
 
-    public ReportActorConverter(ObjectMapper objectMapper) {
+    public ReportConverter(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public List<ReportActorDTO> convert(String response) {
+    public <T> List<T> convert(String response, String targetKey, Class<T> targetClass) {
         try {
             JsonNode jsonNode = objectMapper.readTree(response);
-            JsonNode actorsNode = findNode(jsonNode, "actors");
+            JsonNode targetNode = findNode(jsonNode, targetKey);
 
-            return objectMapper.convertValue(actorsNode, objectMapper.getTypeFactory().constructCollectionType(List.class, ReportActorDTO.class));
+            return objectMapper.convertValue(targetNode, objectMapper.getTypeFactory().constructCollectionType(List.class, targetClass));
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse actors from response: " + response, e);
+            throw new ApiException("Failed to parse actors from response: " + response);
         }
     }
 
